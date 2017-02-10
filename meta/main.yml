@@ -1,7 +1,7 @@
 galaxy_info:
   author: rsjethani
   description: Ansible Role to Install Vagrant
-  license: Apache v2.0
+  license: MIT
   min_ansible_version: 2.0
   platforms:
     - name: Ubuntu
