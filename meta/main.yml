@@ -11,12 +11,14 @@ galaxy_info:
     - name: Debian
       versions:
         - jessie
-    - name: CentOS
+    - name: EL
       versions:
         - 7
   galaxy_tags:
     - system
     - virtualization
+    - centos7
+    - ubuntu
     
 dependencies: []
   # List your role dependencies here, one per line.
