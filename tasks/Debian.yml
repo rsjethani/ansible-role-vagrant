@@ -1,0 +1,12 @@
+---
+
+- name: Download suitable installer package file
+  get_url:
+    url: "{{ vagrant_src_path }}.deb"
+    dest: "{{ vagrant_dest_path }}.deb"
+
+- name: Install Vagrant
+  become: yes
+  apt:
+    deb: "{{ vagrant_dest_path }}.deb"
+    state: present

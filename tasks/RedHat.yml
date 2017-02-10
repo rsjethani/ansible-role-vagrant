@@ -1,0 +1,12 @@
+---
+
+- name: Download package file
+  get_url:
+    url: "{{ vagrant_src_path }}.rpm"
+    dest: "{{ vagrant_dest_path }}.rpm"
+
+- name: Install Vagrant
+  become: yes
+  yum:
+    name: "{{ vagrant_dest_path }}.rpm"
+    state: present
