@@ -1,4 +1,4 @@
-Role Name
+Vagrant
 =========
 
 A brief description of the role goes here.
@@ -30,7 +30,7 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+Apache v2.0
 
 Author Information
 ------------------
