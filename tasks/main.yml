@@ -1,3 +1,12 @@
 ---
 
+- name: Check current vagrant version if present
+  shell: vagrant --version | cut -d " " -f 2
+  register: current_version
+  ignore_errors: yes
+
 - include: "{{ ansible_os_family }}.yml"
+  # Do further processing only when either Vagrant is not installed or the current version
+  # is older than the version specified for installation.
+  when: current_version.stderr != "" or
+        (current_version.stdout|string | version_compare(vagrant_version, "<", strict=True))
