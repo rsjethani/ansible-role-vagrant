@@ -1,9 +1,10 @@
 ---
 
-vagrant_version: 1.9.1
+vagrant_download_url: https://www.vagrantup.com/downloads.html
 
-vagrant_pkg_name: vagrant_{{ vagrant_version }}_{{ ansible_architecture }}
+vagrant_release_url: https://releases.hashicorp.com/vagrant
 
-vagrant_src_path: https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/{{ vagrant_pkg_name }}
+# TODO: Find a better and more secure download destination
+vagrant_dest_path: "{{ ansible_env.PWD }}/vagrant_{{ vagrant_version }}"
 
-vagrant_dest_path: "{{ ansible_env.PWD }}/{{ vagrant_pkg_name }}"
+vagrant_allow_downgrade: no

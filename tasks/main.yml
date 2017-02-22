@@ -1,12 +1,24 @@
 ---
-
 - name: Check current vagrant version if present
   shell: vagrant --version | cut -d " " -f 2
-  register: current_version
+  register: installed_version
   ignore_errors: yes
 
-- include: "{{ ansible_os_family }}.yml"
+
+  # If user has not specified a version the choose the latest version available
+- block:
+  - name: Get latest version of Vagrant
+    shell: curl -s {{ vagrant_download_url }} | grep "vagrant_" | head -1 | cut -d "_" -f 2
+    register: result
+
+  - set_fact: vagrant_version={{result.stdout}}
+
+  when: vagrant_version is undefined
+
+
   # Do further processing only when either Vagrant is not installed or the current version
-  # is older than the version specified for installation.
-  when: current_version.stderr != "" or
-        (current_version.stdout|string | version_compare(vagrant_version, "<", strict=True))
+  # is older than the version specified for installation or user wants to force downgrade
+- include: "{{ ansible_os_family }}.yml"
+  when: installed_version.stderr != "" or
+        (installed_version.stdout | version_compare(vagrant_version, "<", strict=True)) or
+        vagrant_allow_downgrade
