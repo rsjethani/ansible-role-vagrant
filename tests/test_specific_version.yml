@@ -6,4 +6,4 @@
     - name: Verify installed version
       command: vagrant --version
       register: result
-      failed_when: "1.8.5" not in result.stdout
+      failed_when: "'1.8.5' not in result.stdout"
