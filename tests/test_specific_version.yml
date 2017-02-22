@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  roles:
+    - { role: ansible-role-vagrant, vagrant_version: 1.8.5, vagrant_allow_downgrade: yes }
+  tasks:
+    - name: Verify installed version
+      command: vagrant --version
+      register: result
+      failed_when: "1.8.5" not in result.stdout
